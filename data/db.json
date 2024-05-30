@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "id": "ec3e",
+      "title": "Learn Php 8",
+      "completed": true
+    },
+    {
+      "id": "6076",
+      "title": "Learn React",
+      "completed": true
+    },
+    {
+      "id": "c6ec",
+      "title": "Bright Coding",
+      "completed": false
+    },
+    {
+      "id": "ef63",
+      "title": "Learn Spring boot",
+      "completed": true
+    }
+  ]
+}
