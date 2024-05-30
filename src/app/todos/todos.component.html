@@ -29,7 +29,7 @@
     <div class="col-md-8 mx-auto">
         <ul class="list-group">
             @for(todo of todos; track todo.id) {
-                <li class="list-group-item">
+                <li class="list-group-item" (dblclick)="deleteTodo(todo)">
                     <button (click)="completeTodo(todo)" [ngClass]="{
                         'btn-danger': !todo.completed,
                         'btn-light': todo.completed

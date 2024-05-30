@@ -42,7 +42,10 @@ export class TodosComponent implements OnInit {
 
   getAllTodos() {
     this.todoService.getTodos().subscribe({
-      next: (data) => (this.todos = data),
+      next: (data) =>
+        (this.todos = data.sort((a, b) =>
+          a.completed > b.completed ? 1 : a.completed < b.completed ? -1 : 0
+        )),
     });
   }
 
@@ -89,5 +92,22 @@ export class TodosComponent implements OnInit {
   toggleForm() {
     this.initTodo();
     this.openForm = !this.openForm;
+  }
+
+  deleteTodo(todo: Todo) {
+    if (!confirm('Are you sure to delete this todo ' + todo.title)) {
+      return;
+    }
+
+    if (todo.id && !todo.completed) {
+      this.todoService.destroyTodo(todo.id).subscribe({
+        next: (data) => {
+          this.getAllTodos();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 }

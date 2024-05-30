@@ -1,24 +1,29 @@
 {
   "todos": [
     {
-      "id": "ec3e",
-      "title": "Learn Php 8",
-      "completed": true
-    },
-    {
       "id": "6076",
       "title": "Learn React",
       "completed": true
     },
     {
-      "id": "c6ec",
-      "title": "Bright Coding",
-      "completed": false
-    },
-    {
       "id": "ef63",
       "title": "Learn Spring boot",
       "completed": true
+    },
+    {
+      "id": "f672",
+      "title": "Bright Coding",
+      "completed": true
+    },
+    {
+      "id": "23fc",
+      "title": "Learn Django v4",
+      "completed": false
+    },
+    {
+      "id": "b2b0",
+      "title": "Buy some courses from Bright Coding using discount ",
+      "completed": false
     }
   ]
 }
