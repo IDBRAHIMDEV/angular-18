@@ -74,6 +74,7 @@ export class TodosComponent implements OnInit {
     };
 
     this.editable = false;
+    this.openForm = false;
   }
 
   completeTodo(todo: Todo) {
@@ -90,8 +91,7 @@ export class TodosComponent implements OnInit {
   }
 
   toggleForm() {
-    this.initTodo();
-    this.openForm = !this.openForm;
+    this.openForm = true;
   }
 
   deleteTodo(todo: Todo) {
