@@ -3,27 +3,22 @@
     {
       "id": "6076",
       "title": "Learn React",
-      "completed": true
+      "completed": false
     },
     {
       "id": "ef63",
       "title": "Learn Spring boot",
-      "completed": true
-    },
-    {
-      "id": "f672",
-      "title": "Bright Coding ",
-      "completed": true
+      "completed": false
     },
     {
       "id": "23fc",
-      "title": "Learn Django v4",
+      "title": "Learn Django v5",
       "completed": false
     },
     {
       "id": "b2b0",
       "title": "Buy some courses from Bright Coding using discount ",
-      "completed": false
+      "completed": true
     }
   ]
 }

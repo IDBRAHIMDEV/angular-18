@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from './todo.model';
 import { TodoService } from './todo.service';
@@ -12,16 +12,16 @@ import { NgClass } from '@angular/common';
   styleUrl: './todos.component.css',
 })
 export class TodosComponent implements OnInit {
-  todos: Todo[] = [];
+  todos = signal<Todo[]>([]);
 
-  editable = false;
+  editable = signal<boolean>(false);
 
-  openForm: boolean = false;
+  openForm = signal<boolean>(false);
 
-  todo: Todo = {
+  todo = signal<Todo>({
     title: '',
     completed: false,
-  };
+  });
 
   // constructor(private todoService: TodoService) {}
   todoService = inject(TodoService);
@@ -31,7 +31,7 @@ export class TodosComponent implements OnInit {
   }
 
   addTodo() {
-    this.todoService.persistTodo(this.todo).subscribe({
+    this.todoService.persistTodo(this.todo()).subscribe({
       next: (data) => {
         this.getAllTodos();
       },
@@ -42,21 +42,25 @@ export class TodosComponent implements OnInit {
 
   getAllTodos() {
     this.todoService.getTodos().subscribe({
-      next: (data) =>
-        (this.todos = data.sort((a, b) =>
-          a.completed > b.completed ? 1 : a.completed < b.completed ? -1 : 0
-        )),
+      next: (data) => {
+        console.log(data);
+        this.todos.set(
+          data.sort((a, b) =>
+            a.completed > b.completed ? 1 : a.completed < b.completed ? -1 : 0
+          )
+        );
+      },
     });
   }
 
   editTodo(data: Todo) {
-    this.todo = data;
-    this.editable = true;
-    this.openForm = true;
+    this.todo.set(data);
+    this.editable.set(true);
+    this.openForm.set(true);
   }
 
   updateTodo() {
-    let { id, title, completed } = this.todo;
+    let { id, title, completed } = this.todo();
     if (id) {
       this.todoService.changeTodo(id, { title, completed }).subscribe({
         next: (data) => {
@@ -68,13 +72,13 @@ export class TodosComponent implements OnInit {
   }
 
   initTodo() {
-    this.todo = {
+    this.todo.set({
       title: '',
       completed: false,
-    };
+    });
 
-    this.editable = false;
-    this.openForm = false;
+    this.editable.set(false);
+    this.openForm.set(false);
   }
 
   completeTodo(todo: Todo) {
@@ -91,7 +95,7 @@ export class TodosComponent implements OnInit {
   }
 
   toggleForm() {
-    this.openForm = true;
+    this.openForm.set(true);
   }
 
   deleteTodo(todo: Todo) {
